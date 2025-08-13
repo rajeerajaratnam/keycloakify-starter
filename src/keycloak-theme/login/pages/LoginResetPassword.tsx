@@ -44,9 +44,8 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
             displayMessage={false}
             headerNode={msg("emailForgotTitle")} 
             infoNode={msg("emailInstruction")}
-            height="350px" 
-            bottom="100px"
-        >         
+        >       
+        <div style={{ height: "350px", paddingBottom: "100px" }}>
             <div>
                 <img src={logo} style={{ width: '150px', height: '30px', marginRight: '10px', marginBottom: '20px' }} />
                 <div style={{ fontWeight: 400, fontSize: '25px', lineHeight: '40px', color: '#253053', textAlign: 'left', marginBottom: '20px' }}>
@@ -95,6 +94,8 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
                     </div>
                 </div>
             </form>
+        </div>  
+            
         </Template>
     );
 }

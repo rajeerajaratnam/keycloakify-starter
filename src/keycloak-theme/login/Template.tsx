@@ -22,7 +22,7 @@ export default function Template(props: TemplateProps<KcContext, I18n> & { heigh
         displayRequiredFields = false,
         displayWide = false,
         showAnotherWayIfPresent = true,
-        headerNode,
+        headerNode = null,
         showUsernameNode = null,
         infoNode = null,
         kcContext,

@@ -3,6 +3,8 @@ import { lazy, Suspense } from "react";
 import Fallback, { type PageProps } from "keycloakify/login";
 import type { KcContext } from "./kcContext";
 import { useI18n } from "./i18n";
+import AppAuthenticator from "./pages/AppAuthenticator";
+import SelectAuthenticator from "./pages/SelectAuthenticator";
 
 const Template = lazy(() => import("./Template"));
 const DefaultTemplate = lazy(() => import("keycloakify/login/Template"));
@@ -51,6 +53,8 @@ export default function KcApp(props: { kcContext: KcContext; }) {
                 switch (kcContext.pageId) {
                     case "login.ftl": return <Login {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;
                     case "login-reset-password.ftl": return <LoginResetPassword {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;
+                    case "login-config-totp.ftl": return <AppAuthenticator {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;
+                    case "select-authenticator.ftl": return <SelectAuthenticator {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;
                     case "login-update-password.ftl": return <LoginUpdatePassword {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;
                     case "register.ftl": return <Register {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;
                     case "register-user-profile.ftl": return <RegisterUserProfile {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />

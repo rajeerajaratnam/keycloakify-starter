@@ -63,13 +63,15 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
         const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(target.value);
         target.setCustomValidity(isValidEmail ? '' : errorMessage);     
     };
-    const { displayMessage= true } = props;
+
     return (
         <Template
             {...{ kcContext, i18n, doUseDefaultCss, classes}}
             displayInfo={social.displayInfo}
             displayWide={realm.password && social.providers !== undefined}
-            headerNode={msg("doLogIn")}
+            headerNode={msg("doLogIn")
+            }
+            displayMessage={true}
         >
 
           
@@ -169,7 +171,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                     )}
                                 </div>                               
                             </div>                            
-                            {displayMessage && message !== undefined && (message.type !== "warning" || !isAppInitiatedAction) && (
+                            {message !== undefined && (message.type !== "warning" || !isAppInitiatedAction) && (
                                 <div className= "top-center">
                                     {message.type === "success" && <span className={getClassName("kcFeedbackSuccessIcon")}></span>}
                                     {message.type === "warning" && <span className={getClassName("kcFeedbackWarningIcon")}></span>}
