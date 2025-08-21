@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import AppAuthenticator from "./AppAuthenticator";
+import LoginConfigTotp from "./LoginConfigTotp";
 import { createPageStory } from "../createPageStory";
 
 const { PageStory } = createPageStory({
@@ -7,7 +7,7 @@ const { PageStory } = createPageStory({
 });
 
 export default {
-    title: "login/AppAuthenticator",
+    title: "login/LoginConfigTotp",
     component: PageStory,
 } as ComponentMeta<typeof PageStory>;
 

@@ -337,3 +337,26 @@
 .totp-secret-icon:hover {
     opacity: 1;
 }
+
+.otp-code-inputs {
+    display: flex;
+    gap: 18px;
+    margin: 24px 0 18px 0;
+    justify-content: center;
+}
+
+.otp-code-input {
+    width: 44px;
+    height: 44px;
+    border: 2px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    background: #fafbfc;
+    transition: border 0.2s;
+    outline: none;
+}
+
+.otp-code-input:focus {
+    border: 2px solid #2563eb;
+    background: #fff;
+}
