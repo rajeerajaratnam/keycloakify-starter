@@ -1,5 +1,4 @@
 import type { PageProps } from "keycloakify/login/pages/PageProps";
-import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
 import { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
 import logo from "../assets/logo.png";
@@ -8,7 +7,6 @@ export default function SelectAuthenticator(
     props: PageProps<Extract<KcContext, { pageId: "select-authenticator.ftl" }>, I18n>
 ) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
-    const { getClassName } = useGetClassName({ doUseDefaultCss, classes });
     const { url } = kcContext;
     const { msg } = i18n;
 
@@ -19,7 +17,7 @@ export default function SelectAuthenticator(
             displayMessage={false}
             headerNode={ msg("emailForgotTitle")}            
         >
-            <div>
+            <div> 
                 <div>
                     <img src={logo} style={{ width: '150px', height: '30px', marginRight: '10px', marginBottom: '20px' }} />
                     <div style={{ fontWeight: 400, fontSize: '25px', lineHeight: '40px', color: '#253053', textAlign: 'left', marginBottom: '20px' }}>

@@ -211,3 +211,129 @@
     height: 24px;
     cursor: pointer;
 }
+
+.totp-step-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 8px;
+}
+
+.totp-step-text {
+    flex: 1;
+    font-size: 13px;
+    color: #444;
+}
+
+.totp-step-qr {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+}
+
+#kc-totp-secret-qr-code {
+    width: 100px;
+    height: 100px;
+    /* border-radius: 8px;
+    border: 2px solid #2563eb; */
+    background: #fff;
+}
+
+.totp-link {
+    color: #2563eb;
+    text-decoration: underline;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.totp-step2-title {
+    font-size: 15px;
+    color: #444;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+.totp-step2-subtext {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 6px;
+}
+.totp-secret-row {
+    align-items: center;
+    gap: 0;
+    margin-top: 4px;
+    margin-bottom: 10px;
+}
+
+.totp-secret-input {
+    width: 100%;
+    font-family: monospace;
+    font-size: 1.1rem;
+    border: none;
+    border-bottom: 1.5px solid #ccc;
+    background: #fafbfc;
+    padding: 6px 54px 6px 0; /* right padding for icons */
+    color: #222;
+    letter-spacing: 2px;
+    box-sizing: border-box;
+}
+
+.totp-secret-input:focus {
+    border-bottom: 1.5px solid #2563eb;
+    background: #fff;
+}
+
+.totp-secret-icon:hover {
+    opacity: 1;
+}
+
+.totp-code-inputs {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+    margin-bottom: 18px;
+}
+
+.totp-code-input {
+    width: 44px;
+    height: 44px;
+    border: 2px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    background: #fafbfc;
+    transition: border 0.2s;
+    outline: none;
+}
+
+.totp-code-input:focus {
+    border: 2px solid #2563eb;
+    background: #fff;
+}
+
+.totp-secret-input-wrapper {
+    position: relative;
+}
+
+
+.totp-secret-input:focus {
+    border-bottom: 1.5px solid #2563eb;
+    background: #fff;
+}
+
+.totp-secret-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    opacity: 0.7;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    font-size: 1.2rem;
+    color: #888;
+    user-select: none;
+}
+
+.totp-secret-icon:hover {
+    opacity: 1;
+}
