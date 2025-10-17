@@ -76,13 +76,14 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
 
           
             <div id="kc-form" className={clsx(realm.password && social.providers !== undefined && getClassName("kcContentWrapperClass"))}>
-                <div
-                    id="kc-form-wrapper"
-                >
-                    <div>
-                        <img src={logo} style={{ width: '150px', height: '30px', marginRight: '10px', marginBottom: '20px' }} />
-                        <div style={{ fontWeight: 400, fontSize: '25px', lineHeight: '40px', color: '#253053', textAlign: 'left', marginBottom: '20px' }}>
-                            Sign - In To Rise HR
+                <div id="kc-form-wrapper">
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginBottom: '20px' }}>
+                        <img src={logo} style={{ width: '150px', marginBottom: '20px' }} />
+                        <div style={{ fontWeight: 400, fontSize: '24px', lineHeight: '40px', color: '#FFFFFF', textAlign: 'center', marginBottom: '6px' }}>
+                            Good Morning!
+                        </div>
+                        <div style={{ fontWeight: 400, fontSize: '18px', lineHeight: '28px', color: '#161F33', textAlign: 'center', marginBottom: '10px' }}>
+                            Work Smarter. Lead Better. Rise Higher.
                         </div>
                     </div>
 
@@ -114,6 +115,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                                         onInvalid={(e) => handleInvalidInput(e, 'Enter a Valid Email Address')}
                                                         onChange={(e) => handleInputChange(e, 'Enter a Valid Email Address')}
                                                         required
+                                                        style={{ background: "transparent" }}
                                                     />
                                                     <label htmlFor={autoCompleteHelper} className={getClassName("kcLabelClass") + " floating-label"}>
                                                         Email Address
@@ -135,6 +137,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                         onInvalid={(e) => handleInvalidInput(e, 'Enter a Password')}
                                         onChange={(e) => handleInputChange(e, '')}
                                         required
+                                        style={{ background: "transparent" }}
                                     />
                                     <label htmlFor="password" className={getClassName("kcLabelClass")+ " floating-label"}>
                                         Password
@@ -225,13 +228,13 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                             </div>
                             <div className={getClassName("kcFormGroupClass")} style={{marginTop:'20px' }} >
                                 <div className="separator">
-                                    <span style={{fontSize:'14px', color:'#8C8C8C'}}>or continue with:</span>
+                                    <span style={{fontSize:'14px', color:'#ffffff'}}>or continue with:</span>
                                 </div>
                             </div>
                             <div className={getClassName("kcFormGroupClass")} style={{ marginTop:'10px' }}>
                                 {realm.password && social.providers !== undefined && (
                                     <div
-                                        id="kc-social-providers"                                       
+                                        id="kc-social-providers"   
                                     >
                                         <ul
                                             className={clsx(
@@ -241,7 +244,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                         >
                                             {social.providers.map(p => (
                                                 <li key={p.providerId} className={getClassName("kcFormSocialAccountListLinkClass")}>
-                                                    <a href={p.loginUrl} id={`zocial-${p.alias}`} className={clsx("zocial", p.providerId)} style={{ borderRadius: '6px', fontSize: '14px', border: '1px solid #1E24323B', background: '#FFFFFF', color: '#253053' }} >
+                                                    <a href={p.loginUrl} id={`zocial-${p.alias}`} className={clsx("zocial", p.providerId)} style={{ borderRadius: '6px', fontSize: '14px', border: '1px solid #1E24323B', background: 'transparent', color: '#ffffff' }} >
                                                         <img src={microsoft} style={{ width: '20px', height: '20px', marginRight: '5px'}} />
                                                         <span>{p.displayName}</span>
                                                     </a>

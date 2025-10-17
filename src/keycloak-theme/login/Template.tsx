@@ -122,7 +122,7 @@ export default function Template(props: TemplateProps<KcContext, I18n> & { heigh
 
                 {/* Right Side Container */}
                 <div className="right-side">
-                    <div className={clsx(getClassName("kcFormCardClass"), displayWide && getClassName("kcFormCardAccountClass"))} style={{ width: '420px', minHeight: height, borderRadius: '25px', marginBottom: bottom, padding:'40px'}}>
+                    <div className={clsx(getClassName("kcFormCardClass"), displayWide && getClassName("kcFormCardAccountClass"), "glass-card")} style={{ width: '70%', minHeight: height, borderRadius: '25px', marginBottom: bottom, padding:'40px'}}>
                         <div id="kc-content">
                             <div id="kc-content-wrapper"> 
                                 {children}
@@ -169,7 +169,7 @@ export default function Template(props: TemplateProps<KcContext, I18n> & { heigh
             </div>
 
             {/* Footer */}
-            <div style={{ bottom: '0', width: '100%', textAlign: 'center', paddingBottom: '20px' }}>
+            <div style={{ position: 'absolute', left: 0, bottom: 0, width: '100%', textAlign: 'center', paddingBottom: '20px' }}>
                 <div style={{ textAlign: 'center', marginTop: '10px' }}>
                     <img src={twitter} alt="Twitter" style={{ width: '20px', height: '20px', margin: '0 5px' }} />
                     <img src={facebook} alt="Twitter" style={{ width: '20px', height: '20px', margin: '0 5px' }} />
