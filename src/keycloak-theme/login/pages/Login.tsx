@@ -5,7 +5,7 @@ import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
 import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
-import logo from "../assets/logo.png"
+import logo from "../assets/logoHCM.png";
 import microsoft from "../assets/microsoft.svg";
 import eyeicon from "../assets/eyeIcon.svg";
 import eyeiconInvisible from "../assets/eyeIconInvisible.svg";

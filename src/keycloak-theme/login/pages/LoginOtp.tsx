@@ -3,7 +3,7 @@ import { clsx } from "keycloakify/tools/clsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
-import logo from "../assets/logo.png";
+import logo from "../assets/logoHCM.png";
 import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
 
 export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "login-otp.ftl" }>, I18n>) 

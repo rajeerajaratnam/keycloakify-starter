@@ -3,7 +3,7 @@ import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
 import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
-import logo from "../assets/logo.png"
+import logo from "../assets/logoHCM.png"
 import random from "../assets/Random.svg"
 
 export default function MyExtraPage2(props: PageProps<Extract<KcContext, { pageId: "my-extra-page-3.ftl"; }>, I18n>) {

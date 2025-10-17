@@ -1,7 +1,7 @@
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
-import logo from "../assets/logo.png";
+import logo from "../assets/logoHCM.png";
 
 export default function SelectAuthenticator(
     props: PageProps<Extract<KcContext, { pageId: "select-authenticator.ftl" }>, I18n>

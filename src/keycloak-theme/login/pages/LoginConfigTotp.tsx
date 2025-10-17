@@ -2,7 +2,7 @@ import { clsx } from "keycloakify/tools/clsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
-import logo from "../assets/logo.png"
+import logo from "../assets/logoHCM.png";
 import React from "react";
 import eyeicon from "../assets/eyeIcon.svg";
 import lefticon from "../assets/leftIcon.svg";
