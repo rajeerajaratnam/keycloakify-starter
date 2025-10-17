@@ -7,7 +7,6 @@ import { type TemplateProps } from "keycloakify/login/TemplateProps";
 import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
 import type { KcContext } from "./kcContext";
 import type { I18n } from "./i18n";
-import login from "./assets/login.svg";
 import twitter from "./assets/twitter.svg";
 import linkedIn from "./assets/linkedin.svg";
 import facebook from "./assets/facebook.svg";
@@ -101,16 +100,23 @@ export default function Template(props: TemplateProps<KcContext, I18n> & { heigh
                 </>
             )} */}
 
-            <div className="middle-container">
+            <div className="middle-container" style={{ paddingTop: '10%', paddingLeft: '109px' }}>
                 {/* Left Side Container */}
-                <div className="left-side">
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'end', justifyContent: 'center' }}>
+                 <div className="left-side">
+                    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
 
-                        <div style={{ fontWeight: 400, fontSize: '48px', lineHeight: '48px', color: '#253053', textAlign: 'center' }}>
-                            Welcome Back!
+                        <div style={{ color: "var(--White, #FFF)", textShadow: "0 4px 4px rgba(0, 0, 0, 0.25)", WebkitTextStrokeWidth: "1px", WebkitTextStrokeColor: "#535E82", fontFamily: "DaytonaPro-Semibold", fontSize: "96px", fontStyle: "normal", fontWeight: 400, lineHeight: "normal", letterSpacing: "-2.88px", textAlign: "left" }}>
+                            Empower People
                         </div>
-
-                        <img src={login} style={{ width: '400px', height: '400px' }} />
+                        <div style={{ color: "var(--White, #FFF)", textShadow: "0 4px 4px rgba(0, 0, 0, 0.25)", WebkitTextStrokeWidth: "1px", WebkitTextStrokeColor: "#535E82", fontFamily: "DaytonaPro-Semibold", fontSize: "96px", fontStyle: "normal", fontWeight: 400, lineHeight: "normal", letterSpacing: "-2.88px", textAlign: "left" }}>
+                            Elevate HR
+                        </div>
+                        <div style={{ color: "var(--White, #FFF)", textShadow: "0 4px 4px rgba(0, 0, 0, 0.25)", WebkitTextStrokeWidth: "1px", WebkitTextStrokeColor: "var(--Icon-active, #535E82)", fontFamily: "DaytonaPro-Regular", fontSize: "32px", fontStyle: "normal", fontWeight: 400, lineHeight: "normal" ,textAlign: "left"}}>
+                            Where modern HR meets real impact
+                        </div>
+                        <div style={{ color: "var(--White, #FFF)", textShadow: "0 4px 4px rgba(0, 0, 0, 0.25)", WebkitTextStrokeWidth: "1px", WebkitTextStrokeColor: "var(--Icon-active, #535E82)", fontFamily: "DaytonaPro-Regular", fontSize: "24px", fontStyle: "normal", fontWeight: 400, lineHeight: "37px", textAlign: "left", marginTop: "20px" }}>
+                            Help every employee rise <br/>with workflows, insights and care
+                        </div>
                     </div>
                 </div>
 
