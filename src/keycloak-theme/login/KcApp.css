@@ -1,3 +1,9 @@
+/* Microsoft sign-in button hover effect */
+.zocial.microsoft:hover {
+    background: rgba(44, 130, 249, 0.15);
+    color: #2C82F9 !important;
+    transition: background 0.2s;
+}
 .my-color {
 	color: red;
 }
