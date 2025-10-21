@@ -100,7 +100,7 @@ export default function Template(props: TemplateProps<KcContext, I18n> & { heigh
                 </>
             )} */}
 
-            <div className="middle-container" style={{ paddingTop: '10%', paddingLeft: '109px' }}>
+            <div className="middle-container" style={{ paddingTop: '10%', paddingLeft: '10%', paddingRight: '10%', width: '100%' }}>
                 {/* Left Side Container */}
                  <div className="left-side">
                     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
@@ -111,10 +111,10 @@ export default function Template(props: TemplateProps<KcContext, I18n> & { heigh
                         <div style={{ color: "var(--White, #FFF)", textShadow: "0 4px 4px rgba(0, 0, 0, 0.25)", WebkitTextStrokeWidth: "1px", WebkitTextStrokeColor: "#535E82", fontFamily: "DaytonaPro-Semibold", fontSize: "96px", fontStyle: "normal", fontWeight: 400, lineHeight: "normal", letterSpacing: "-2.88px", textAlign: "left" }}>
                             Elevate HR
                         </div>
-                        <div style={{ color: "var(--White, #FFF)", textShadow: "0 4px 4px rgba(0, 0, 0, 0.25)", WebkitTextStrokeWidth: "1px", WebkitTextStrokeColor: "var(--Icon-active, #535E82)", fontFamily: "DaytonaPro-Regular", fontSize: "32px", fontStyle: "normal", fontWeight: 400, lineHeight: "normal" ,textAlign: "left"}}>
+                        <div style={{ color: "var(--White, #FFF)", textShadow: "0 4px 4px rgba(0, 0, 0, 0.25)", WebkitTextStrokeWidth: "0.5px", WebkitTextStrokeColor: "var(--Icon-active, #535E82)", fontFamily: "DaytonaPro-Regular", fontSize: "32px", fontStyle: "normal", fontWeight: 400, lineHeight: "normal" ,textAlign: "left"}}>
                             Where modern HR meets real impact
                         </div>
-                        <div style={{ color: "var(--White, #FFF)", textShadow: "0 4px 4px rgba(0, 0, 0, 0.25)", WebkitTextStrokeWidth: "1px", WebkitTextStrokeColor: "var(--Icon-active, #535E82)", fontFamily: "DaytonaPro-Regular", fontSize: "24px", fontStyle: "normal", fontWeight: 400, lineHeight: "37px", textAlign: "left", marginTop: "20px" }}>
+                        <div style={{ color: "var(--White, #FFF)", textShadow: "0 4px 4px rgba(0, 0, 0, 0.25)", WebkitTextStrokeWidth: "0.3px", WebkitTextStrokeColor: "var(--Icon-active, #535E82)", fontFamily: "DaytonaPro-Regular", fontSize: "24px", fontStyle: "normal", fontWeight: 400, lineHeight: "37px", textAlign: "left", marginTop: "20px" }}>
                             Help every employee rise <br/>with workflows, insights and care
                         </div>
                     </div>
@@ -122,7 +122,7 @@ export default function Template(props: TemplateProps<KcContext, I18n> & { heigh
 
                 {/* Right Side Container */}
                 <div className="right-side">
-                    <div className={clsx(getClassName("kcFormCardClass"), displayWide && getClassName("kcFormCardAccountClass"), "glass-card")} style={{ width: '70%', borderRadius: '25px', marginBottom: bottom, padding:'40px'}}>
+                    <div className={clsx(getClassName("kcFormCardClass"), displayWide && getClassName("kcFormCardAccountClass"), "glass-card")} style={{ width: '65%', borderRadius: '25px', marginBottom: bottom, padding:'80px 40px', marginRight: '0'}}>
                         <div id="kc-content">
                             <div id="kc-content-wrapper"> 
                                 {children}

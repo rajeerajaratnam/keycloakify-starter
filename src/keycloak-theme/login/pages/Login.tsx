@@ -78,11 +78,11 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
             <div id="kc-form" className={clsx(realm.password && social.providers !== undefined && getClassName("kcContentWrapperClass"))}>
                 <div id="kc-form-wrapper">
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginBottom: '20px' }}>
-                        <img src={logo} style={{ width: '175px', marginBottom: '20px', filter: 'contrast(1.75)' }} />
-                        <div style={{ fontWeight: 400, fontSize: '24px', lineHeight: '40px', color: '#FFFFFF', textAlign: 'center', marginBottom: '6px' }}>
-                            Good Morning!
+                        <img src={logo} style={{ width: '175px', marginBottom: '20px' }} />
+                        <div style={{ fontWeight: 400, fontSize: '22px', lineHeight: '40px', color: '#F4F5F6', textAlign: 'center', marginBottom: '6px' }}>
+                            Good Morning !
                         </div>
-                        <div style={{ fontWeight: 400, fontSize: '18px', lineHeight: '28px', color: '#161F33', textAlign: 'center', marginBottom: '10px' }}>
+                        <div style={{ fontWeight: 400, fontSize: '18px', lineHeight: '28px', color: '#F4F5F6', textAlign: 'center', marginBottom: '10px' }}>
                             Work Smarter. Lead Better. Rise Higher.
                         </div>
                     </div>
@@ -115,7 +115,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                                         onInvalid={(e) => handleInvalidInput(e, 'Enter a Valid Email Address')}
                                                         onChange={(e) => handleInputChange(e, 'Enter a Valid Email Address')}
                                                         required
-                                                        style={{ background: "transparent", color: '#5E6368' }}
+                                                        style={{ background: "transparent" }}
                                                     />
                                                     <label htmlFor={autoCompleteHelper} className={getClassName("kcLabelClass") + " floating-label"}>
                                                         Email Address

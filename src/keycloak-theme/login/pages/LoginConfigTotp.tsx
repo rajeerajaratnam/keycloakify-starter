@@ -52,11 +52,11 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
             headerNode={msg("loginTotpTitle")}
             displayMessage={!messagesPerField.existsError("totp")}
         >
-            <div style={{ height: "500px", paddingBottom: "100px" }}>
+            <div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginBottom: '20px' }}>
-                    <img src={logo} style={{ width: '150px', marginBottom: '20px' }} />
-                    <div style={{ fontWeight: 400, fontSize: '24px', lineHeight: '40px', color: '#161F33', textAlign: 'center', marginBottom: '6px' }}>
+                    <img src={logo} style={{ width: '175px', marginBottom: '20px' }} />
+                    <div style={{ fontWeight: 400, fontSize: '24px', lineHeight: '40px', color: '#161F33', textAlign: 'center', marginBottom: '6px', filter: 'contrast(1.75)' }}>
                         Two-factor Authentication
                     </div>
                 </div>

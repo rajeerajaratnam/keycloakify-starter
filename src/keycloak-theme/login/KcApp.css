@@ -18,7 +18,7 @@
 
 .kcFormCardClass{
 	background: #FFFFFF;
-	margin-left: 100px;
+	margin-left: auto;
 	padding: 50px;
 }
 
@@ -32,11 +32,11 @@
 }
 
 .glass-card {
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     position: relative;
     overflow: hidden;
-    background: rgba(0, 0, 0, 0.001);
+    background: rgba(255, 255, 255, 0.12);
     border: 1px solid #5E6067 !important;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
     border-radius: 25px;
@@ -77,9 +77,7 @@
 
 .middle-container {
     position: relative;
-    
-    /* left: 300px; */
-    width: 90%;
+    width: 100%;
     right: 10px;
     display: flex;
     justify-content: space-between;
@@ -135,7 +133,7 @@
 		left: 0px;
 		font-size: 12px;
 		opacity: 1;
-		color: #888;
+		color: #5E6368;
 		box-shadow: none;
 	}
         input:focus {
@@ -181,7 +179,7 @@
   left: 0;
 	margin: 0;
     padding: 0;
-    background: url(./assets/login-imge.png) no-repeat center center ;
+    background: url(./assets/login-imge.png) no-repeat left top ;
     -webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;
 
 }
@@ -307,7 +305,7 @@
     font-size: 1.1rem;
     border: none;
     border-bottom: 1.5px solid #ccc;
-    background: #fafbfc;
+    background: transparent !important;
     padding: 6px 54px 6px 0; /* right padding for icons */
     color: #222;
     letter-spacing: 2px;
@@ -325,7 +323,7 @@
 
 .totp-code-inputs {
     display: flex;
-    gap: 12px;
+    justify-content: space-between;
     margin-top: 12px;
     margin-bottom: 18px;
 }
@@ -376,7 +374,7 @@
 
 .otp-code-inputs {
     display: flex;
-    gap: 18px;
+   justify-content: space-between;
     margin: 24px 0 18px 0;
 }
 
@@ -413,3 +411,44 @@ input.form-control:-webkit-autofill:active {
 }
 
 
+#rememberMe:checked {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+#rememberMe:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  font-weight: bold;
+}
+
+#rememberMe:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+#rememberMe:focus {
+    outline: none
+}
+
+#rememberMe {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid #5E6067;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.checkbox label, .radio label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}

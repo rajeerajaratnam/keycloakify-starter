@@ -59,8 +59,8 @@ export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "
         >
             <div>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginBottom: '20px' }}>
-                    <img src={logo} style={{ width: '175px', marginBottom: '20px', filter: 'contrast(1.75)' }} />
-                    <div style={{ fontWeight: 400, fontSize: '25px', lineHeight: '40px', color: '#161F33', textAlign: 'center', marginBottom: '6px', filter: 'contrast(1.75)'  }}>
+                    <img src={logo} style={{ width: '175px', marginBottom: '20px' }} />
+                    <div style={{ fontWeight: 400, fontSize: '25px', lineHeight: '40px', color: '#161F33', textAlign: 'center', marginBottom: '6px' }}>
                         Two-factor Authentication
                     </div>
                     <div style={{ color: "#F4F5F6", fontSize: '14px', marginBottom: 24, textAlign: 'center' }}>
