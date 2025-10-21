@@ -80,7 +80,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginBottom: '20px' }}>
                         <img src={logo} style={{ width: '175px', marginBottom: '20px' }} />
                         <div style={{ fontWeight: 400, fontSize: '22px', lineHeight: '40px', color: '#F4F5F6', textAlign: 'center', marginBottom: '6px' }}>
-                            Good Morning !
+                            Good Evening !
                         </div>
                         <div style={{ fontWeight: 400, fontSize: '18px', lineHeight: '28px', color: '#F4F5F6', textAlign: 'center', marginBottom: '10px' }}>
                             Work Smarter. Lead Better. Rise Higher.
