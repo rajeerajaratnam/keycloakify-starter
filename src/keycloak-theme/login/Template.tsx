@@ -122,7 +122,7 @@ export default function Template(props: TemplateProps<KcContext, I18n> & { heigh
 
                 {/* Right Side Container */}
                 <div className="right-side">
-                    <div className={clsx(getClassName("kcFormCardClass"), displayWide && getClassName("kcFormCardAccountClass"), "glass-card")} style={{ width: '70%', minHeight: height, borderRadius: '25px', marginBottom: bottom, padding:'40px'}}>
+                    <div className={clsx(getClassName("kcFormCardClass"), displayWide && getClassName("kcFormCardAccountClass"), "glass-card")} style={{ width: '70%', borderRadius: '25px', marginBottom: bottom, padding:'40px'}}>
                         <div id="kc-content">
                             <div id="kc-content-wrapper"> 
                                 {children}

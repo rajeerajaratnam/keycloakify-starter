@@ -45,13 +45,13 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
             headerNode={msg("emailForgotTitle")} 
             infoNode={msg("emailInstruction")}
         >       
-        <div style={{ height: "350px", paddingBottom: "100px" }}>
-            <div>
-                <img src={logo} style={{ width: '150px', height: '30px', marginRight: '10px', marginBottom: '20px' }} />
-                <div style={{ fontWeight: 400, fontSize: '25px', lineHeight: '40px', color: '#253053', textAlign: 'left', marginBottom: '20px' }}>
-                    Forgot Password
+        <div style={{ height: "300px", paddingBottom: "100px" }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginBottom: '20px' }}>
+                    <img src={logo} style={{ width: '175px', marginBottom: '20px', filter: 'contrast(1.75)' }} />
+                    <div style={{ fontWeight: 400, fontSize: '25px', lineHeight: '40px', color: '#253053', textAlign: 'center', marginBottom: '6px', filter: 'contrast(1.75)' }}>
+                        Forgot Password
+                    </div>
                 </div>
-            </div>
             <form id="kc-reset-password-form" className={getClassName("kcFormClass")} action={url.loginAction} method="post">              
                 <div className={getClassName("kcFormGroupClass")}>
                     <div className="floating-label-group">
