@@ -378,7 +378,6 @@
     display: flex;
     gap: 18px;
     margin: 24px 0 18px 0;
-    justify-content: center;
 }
 
 .otp-code-input {

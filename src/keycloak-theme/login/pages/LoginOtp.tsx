@@ -80,8 +80,7 @@ export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "
                             <label htmlFor="otp" className={clsx("kcLabelClass")} style={{ fontSize: '16px', color: '#253053', fontWeight: '600' }}>
                                 We’ve Sent you a code
                             </label>
-                        </div>
-                        <div className="otp-code-inputs">
+                            <div className="otp-code-inputs">
                             {code.map((digit, idx) => (
                                 <input
                                     key={idx}
@@ -110,6 +109,8 @@ export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "
                                 {messagesPerField.get("totp")}
                             </span>
                         )}
+                        </div>
+                        
                     </div>
 
                     <div style={{ textAlign: "center" }}>
