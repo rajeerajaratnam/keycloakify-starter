@@ -20,6 +20,18 @@
   <link rel="preload" href="%PUBLIC_URL%/fonts/WorkSans/worksans-medium-webfont.woff2" as="font" crossorigin="anonymous">
   <link rel="preload" href="%PUBLIC_URL%/fonts/WorkSans/worksans-regular-webfont.woff2" as="font" crossorigin="anonymous">
   <link rel="preload" href="%PUBLIC_URL%/fonts/WorkSans/worksans-semibold-webfont.woff2" as="font" crossorigin="anonymous">
+
+    <link rel="preload" href="%PUBLIC_URL%/fonts/Daytona/DaytonaPro-Bold.eot" as="font" crossorigin="anonymous">
+    <link rel="preload" href="%PUBLIC_URL%/fonts/Daytona/DaytonaPro-Bold.ttf" as="font" crossorigin="anonymous">
+    <link rel="preload" href="%PUBLIC_URL%/fonts/Daytona/DaytonaPro-Light.eot" as="font" crossorigin="anonymous">
+    <link rel="preload" href="%PUBLIC_URL%/fonts/Daytona/DaytonaPro-Light.ttf" as="font" crossorigin="anonymous">
+    <link rel="preload" href="%PUBLIC_URL%/fonts/Daytona/DaytonaPro-Semibold.eot" as="font" crossorigin="anonymous">
+    <link rel="preload" href="%PUBLIC_URL%/fonts/Daytona/DaytonaPro-Semibold.ttf" as="font" crossorigin="anonymous">
+    <link rel="preload" href="%PUBLIC_URL%/fonts/Daytona/DaytonaProRegular.eot" as="font" crossorigin="anonymous">
+    <link rel="preload" href="%PUBLIC_URL%/fonts/Daytona/DaytonaProRegular.ttf" as="font" crossorigin="anonymous">
+    <link rel="preload" href="%PUBLIC_URL%/fonts/Daytona/DaytonaProRegular.woff" as="font" crossorigin="anonymous">
+    <link rel="preload" href="%PUBLIC_URL%/fonts/Daytona/DaytonaProRegular.woff2" as="font" crossorigin="anonymous">
+
   <!-- SEE: https://docs.keycloakify.dev/limitations#self-hosted-fonts -->
   <!-- Don't forget to import your custom fonts in Storybook as well: https://github.com/keycloakify/keycloakify-starter/blob/bb019e66fb09166cb9af1e24e230994f59daa420/src/keycloak-theme/login/createPageStory.tsx#L21 -->
   <style>
@@ -60,6 +72,111 @@
     	font-display: swap;
     	src: url("%PUBLIC_URL%/fonts/WorkSans/worksans-bold-webfont.woff2") format("woff2");
     }
+
+
+    @font-face {
+  font-family: DaytonaProLight;
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  src: url("%PUBLIC_URL%/fonts/Daytona/DaytonaPro-Light.eot");
+  src:
+    url("%PUBLIC_URL%/fonts/Daytona/DaytonaPro-Light.eot?#iefix") format("embedded-opentype"),
+    url("%PUBLIC_URL%/fonts/Daytona/DaytonaPro-Light.ttf") format("truetype");
+  -webkit-font-smoothing: antialiased !important;
+}
+
+@font-face {
+  font-family: DaytonaProRegular;
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+  src: url("%PUBLIC_URL%/fonts/Daytona/DaytonaProRegular.eot");
+  src: url("%PUBLIC_URL%/fonts/Daytona/DaytonaProRegular.eot");
+  src:
+    url("%PUBLIC_URL%/fonts/Daytona/DaytonaProRegular.eot") format("embedded-opentype"),
+    url("%PUBLIC_URL%/fonts/Daytona/DaytonaProRegular.woff2") format("woff2"),
+    url("%PUBLIC_URL%/fonts/Daytona/DaytonaProRegular.woff") format("woff"),
+    url("%PUBLIC_URL%/fonts/Daytona/DaytonaProRegular.ttf") format("truetype");
+  -webkit-font-smoothing: antialiased !important;
+}
+
+@font-face {
+  font-family: DaytonaPro-bold;
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+  src: url("%PUBLIC_URL%/fonts/Daytona/DaytonaPro-Bold.eot");
+  src:
+    url("%PUBLIC_URL%/fonts/Daytona/DaytonaPro-Bold.eot?#iefix") format("embedded-opentype"),
+    url("%PUBLIC_URL%/fonts/Daytona/DaytonaPro-Bold.ttf") format("truetype");
+  -webkit-font-smoothing: antialiased !important;
+}
+
+@font-face {
+  font-family: DaytonaProSamibold;
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url("%PUBLIC_URL%/fonts/Daytona/DaytonaPro-Semibold.eot");
+  src:
+    url("%PUBLIC_URL%/fonts/Daytona/DaytonaPro-Semibold.eot?#iefix") format("embedded-opentype"),
+    url("%PUBLIC_URL%/fonts/Daytona/DaytonaPro-Semibold.ttf") format("truetype");
+  -webkit-font-smoothing: antialiased !important;
+}
+
+@font-face {
+  font-family: DaytonaProRegular;
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+  src: url("%PUBLIC_URL%/fonts/Daytona/DaytonaProRegular.eot");
+  src: url("%PUBLIC_URL%/fonts/Daytona/DaytonaProRegular.eot");
+  src:
+    url("%PUBLIC_URL%/fonts/Daytona/DaytonaProRegular.eot") format("embedded-opentype"),
+    url("%PUBLIC_URL%/fonts/Daytona/DaytonaProRegular.woff2") format("woff2"),
+    url("%PUBLIC_URL%/fonts/Daytona/DaytonaProRegular.woff") format("woff"),
+    url("%PUBLIC_URL%/fonts/Daytona/DaytonaProRegular.ttf") format("truetype");
+  -webkit-font-smoothing: antialiased !important;
+}
+
+@font-face {
+  font-family: DaytonaPro-bold;
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+  src: url("%PUBLIC_URL%/fonts/Daytona/DaytonaPro-Bold.eot");
+  src:
+    url("%PUBLIC_URL%/fonts/Daytona/DaytonaPro-Bold.eot?#iefix") format("embedded-opentype"),
+    url("%PUBLIC_URL%/fonts/Daytona/DaytonaPro-Bold.ttf") format("truetype");
+  -webkit-font-smoothing: antialiased !important;
+}
+
+@font-face {
+  font-family: DaytonaProSamibold;
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url("%PUBLIC_URL%/fonts/Daytona/DaytonaPro-Semibold.eot");
+  src:
+    url("%PUBLIC_URL%/fonts/Daytona/DaytonaPro-Semibold.eot?#iefix") format("embedded-opentype"),
+    url("%PUBLIC_URL%/fonts/Daytona/DaytonaPro-Semibold.ttf") format("truetype");
+  -webkit-font-smoothing: antialiased !important;
+}
+
+@font-face {
+  font-family: DaytonaProSamibold;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("%PUBLIC_URL%/fonts/Daytona/DaytonaPro-Semibold.eot");
+  src:
+    url("%PUBLIC_URL%/fonts/Daytona/DaytonaPro-Semibold.eot?#iefix") format("embedded-opentype"),
+    url("%PUBLIC_URL%/fonts/Daytona/DaytonaPro-Semibold.ttf") format("truetype");
+  -webkit-font-smoothing: antialiased !important;
+}
+
+
   </style>
 
   <meta name="keycloakify-ignore-start">

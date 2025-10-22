@@ -1,4 +1,13 @@
 /* Microsoft sign-in button hover effect */
+@import url('https://fonts.googleapis.com/css2?family=Cousine:wght@400;700&display=swap');
+@import url('../../../public/fonts/Daytona/font.css');
+
+
+
+body {
+  font-family: DaytonaProRegular !important;
+}
+
 .zocial.microsoft:hover {
     background: rgba(44, 130, 249, 0.15);
     color: #2C82F9 !important;
@@ -9,7 +18,7 @@
 }
 
 .my-font {
-	font-family: 'DaytonaProLight';
+	font-family: DaytonaProRegular !important;
 }
 
 .my-root-class {

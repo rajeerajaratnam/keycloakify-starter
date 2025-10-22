@@ -9,8 +9,6 @@ import logo from "../assets/logoHCM.png";
 import microsoft from "../assets/microsoft.svg";
 import eyeicon from "../assets/eyeIcon.svg";
 import eyeiconInvisible from "../assets/eyeIconInvisible.svg";
-import type { TemplateProps } from "keycloakify/login/TemplateProps"; // Import TemplateProps type
-import { truncateSync } from "fs";
 
 
 const my_custom_param= new URL(window.location.href).searchParams.get("my_custom_param");
@@ -79,7 +77,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                 <div id="kc-form-wrapper">
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginBottom: '20px' }}>
                         <img src={logo} style={{ width: '175px', marginBottom: '20px' }} />
-                        <div style={{ fontWeight: 400, fontSize: '22px', lineHeight: '40px', color: '#F4F5F6', textAlign: 'center', marginBottom: '6px' }}>
+                        <div style={{ fontFamily: 'Cousine', fontWeight: 400, fontSize: '24px', lineHeight: '40px', color: '#F4F5F6', textAlign: 'center', marginBottom: '6px' }}>
                             Good Evening !
                         </div>
                         <div style={{ fontWeight: 400, fontSize: '18px', lineHeight: '28px', color: '#F4F5F6', textAlign: 'center', marginBottom: '10px' }}>

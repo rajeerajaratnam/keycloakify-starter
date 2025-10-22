@@ -1,0 +1,101 @@
+@font-face {
+  font-family: DaytonaProLight;
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  src: url('./DaytonaPro-Light.eot');
+  src:
+    url('./DaytonaPro-Light.eot?#iefix') format('embedded-opentype'),
+    url('./DaytonaPro-Light.ttf') format('truetype');
+  -webkit-font-smoothing: antialiased !important;
+}
+
+@font-face {
+  font-family: DaytonaProRegular;
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+  src: url('./DaytonaProRegular.eot');
+  src: url('./DaytonaProRegular.eot');
+  src:
+    url('./DaytonaProRegular.eot') format('embedded-opentype'),
+    url('./DaytonaProRegular.woff2') format('woff2'),
+    url('./DaytonaProRegular.woff') format('woff'),
+    url('./DaytonaProRegular.ttf') format('truetype');
+  -webkit-font-smoothing: antialiased !important;
+}
+
+@font-face {
+  font-family: DaytonaPro-bold;
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+  src: url('./DaytonaPro-Bold.eot');
+  src:
+    url('./DaytonaPro-Bold.eot?#iefix') format('embedded-opentype'),
+    url('./DaytonaPro-Bold.ttf') format('truetype');
+  -webkit-font-smoothing: antialiased !important;
+}
+
+@font-face {
+  font-family: DaytonaProSamibold;
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url('./DaytonaPro-Semibold.eot');
+  src:
+    url('./DaytonaPro-Semibold.eot?#iefix') format('embedded-opentype'),
+    url('./DaytonaPro-Semibold.ttf') format('truetype');
+  -webkit-font-smoothing: antialiased !important;
+}
+
+@font-face {
+  font-family: DaytonaProRegular;
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+  src: url('./DaytonaProRegular.eot');
+  src: url('./DaytonaProRegular.eot');
+  src:
+    url('./DaytonaProRegular.eot') format('embedded-opentype'),
+    url('./DaytonaProRegular.woff2') format('woff2'),
+    url('./DaytonaProRegular.woff') format('woff'),
+    url('./DaytonaProRegular.ttf') format('truetype');
+  -webkit-font-smoothing: antialiased !important;
+}
+
+@font-face {
+  font-family: DaytonaPro-bold;
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+  src: url('./DaytonaPro-Bold.eot');
+  src:
+    url('./DaytonaPro-Bold.eot?#iefix') format('embedded-opentype'),
+    url('./DaytonaPro-Bold.ttf') format('truetype');
+  -webkit-font-smoothing: antialiased !important;
+}
+
+@font-face {
+  font-family: DaytonaProSamibold;
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url('./DaytonaPro-Semibold.eot');
+  src:
+    url('./DaytonaPro-Semibold.eot?#iefix') format('embedded-opentype'),
+    url('./DaytonaPro-Semibold.ttf') format('truetype');
+  -webkit-font-smoothing: antialiased !important;
+}
+
+@font-face {
+  font-family: DaytonaProSamibold;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url('./DaytonaPro-Semibold.eot');
+  src:
+    url('./DaytonaPro-Semibold.eot?#iefix') format('embedded-opentype'),
+    url('./DaytonaPro-Semibold.ttf') format('truetype');
+  -webkit-font-smoothing: antialiased !important;
+}

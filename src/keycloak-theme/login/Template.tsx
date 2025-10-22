@@ -179,7 +179,7 @@ export default function Template(props: TemplateProps<KcContext, I18n> & { heigh
                 </div>
 
                 <div style={{ textAlign: 'center', marginTop: '20px', fontSize:'12px',color:'#ffffff',fontWeight:'400' }}>
-                    Copyright © 2023 Rise HR Software (Pvt) Ltd. All Rights Reserved.
+                    Copyright © 2025 Rise HCM Software (Pvt) Ltd. All Rights Reserved.
                 </div>
             </div>
         </div>
