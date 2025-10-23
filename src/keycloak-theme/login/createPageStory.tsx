@@ -18,7 +18,7 @@ export function createPageStory<PageId extends KcContext["pageId"]>(params: {
         return (
             <>
                 {/* If you import custom fonts in your index.html you have to import them in storybook as well*/}
-                <link rel="stylesheet" type="text/css" href="fonts/Daytona/font.css" />
+                <link rel="stylesheet" type="text/css" href="/src/fonts/Daytona/font.css" />
                 <KcApp kcContext={kcContext} />
             </>
         );
