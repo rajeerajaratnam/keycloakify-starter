@@ -20,18 +20,14 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
         classes
     });
 
-    // State for 6-digit code
     const [code, setCode] = React.useState(["", "", "", "", "", ""]);
     const inputsRef = React.useRef<Array<HTMLInputElement | null>>([]);
 
-    // Handle input change
     const handleCodeChange = (idx: number, value: string) => {
-        if (!/^[0-9a-zA-Z]?$/.test(value)) return; // Only allow single char
+        if (!/^[0-9a-zA-Z]?$/.test(value)) return; 
         const newCode = [...code];
         newCode[idx] = value;
         setCode(newCode);
-
-        // Move to next input if filled
         if (value && idx < 5) {
             inputsRef.current[idx + 1]?.focus();
         }
