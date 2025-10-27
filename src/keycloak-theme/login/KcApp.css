@@ -643,3 +643,54 @@ input.form-control:-webkit-autofill:active {
 .totp-margin-top10 {
     margin-top: 10px;
 }
+
+/* === Classes for LoginOtp.tsx === */
+.otp-header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.otp-logo {
+    width: 175px;
+    margin-bottom: 20px;
+}
+.otp-title {
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 40px;
+    color: #161F33;
+    text-align: center;
+    margin-bottom: 6px;
+}
+.otp-description {
+    color: #F4F5F6;
+    font-size: 14px;
+    margin-bottom: 24px;
+    text-align: center;
+}
+.otp-label {
+    font-size: 16px;
+    color: #253053;
+    font-weight: 600;
+}
+.otp-code-input-center {
+    text-align: center;
+}
+.otp-btn-verify {
+    background-color: #2C82F9;
+    border-radius: 6px;
+    color: #FFFFFF;
+}
+.otp-margin-top50 {
+    margin-top: 50px;
+}
+.otp-margin-top10 {
+    margin-top: 10px;
+}
+.otp-btn-cancel {
+    font-size: 14px;
+    color: #2C82F9;
+    font-weight: 400;
+}
