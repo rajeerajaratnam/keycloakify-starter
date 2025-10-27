@@ -54,9 +54,9 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
         >
             <div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginBottom: '20px' }}>
-                    <img src={logo} style={{ width: '175px', marginBottom: '20px' }} />
-                    <div style={{ fontWeight: 400, fontSize: '24px', lineHeight: '40px', color: '#161F33', textAlign: 'center', marginBottom: '6px' }}>
+                <div className="totp-header-container">
+                    <img src={logo} className="totp-logo" />
+                    <div className="totp-title">
                         Two-factor Authentication
                     </div>
                 </div>
@@ -148,18 +148,16 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                                 <img
                                     src={showSecret ? eyeiconInvisible : eyeicon}
                                     alt={showSecret ? "Hide" : "Show"}
-                                    className="totp-secret-icon"
                                     title={showSecret ? "Hide" : "Show"}
                                     onClick={() => setShowSecret(show => !show)}
-                                    style={{ right: 30 }}
+                                    className={clsx("totp-secret-icon", "totp-secret-icon-right30")}
                                 />
                                 <img
                                     src={lefticon}
                                     alt="Copy"
-                                    className="totp-secret-icon"
                                     title="Copy"
                                     onClick={() => navigator.clipboard.writeText(totp.totpSecretEncoded)}
-                                    style={{ right: 5 }}
+                                    className={clsx("totp-secret-icon", "totp-secret-icon-right5")}
                                 />
                             </div>
                         </div>
@@ -175,21 +173,20 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                             type="text"
                             inputMode="numeric"
                             maxLength={1}
-                            className="totp-code-input"
                             value={digit}
                             ref={el => (inputsRef.current[idx] = el)}
                             onChange={e => handleCodeChange(idx, e.target.value.replace(/[^0-9a-zA-Z]/, ""))}
                             onKeyDown={e => handleKeyDown(idx, e)}
                             autoFocus={idx === 0}
                             name={`code-${idx}`}
-                            style={{ textAlign: "center" }}
+                            className={clsx("totp-code-input", "totp-code-input-center")}
                         />
                     ))}
                 </div>
             </li>
                 </ol>
 
-                <form action={url.loginAction} className={clsx("kcFormClass")} id="kc-totp-settings-form" method="post" style={{ paddingLeft: '20px' }}>
+                <form action={url.loginAction} className={clsx("kcFormClass", "totp-form-padding")} id="kc-totp-settings-form" method="post">
                     <div className={clsx("kcFormGroupClass")}>
                         <input type="hidden" name="totp" value={code.join("")} />
                         <input type="hidden" id="totpSecret" name="totpSecret" value={totp.totpSecret} />
@@ -197,27 +194,21 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                     </div>
 
                     {isAppInitiatedAction ? (
-                        <div style={{ textAlign: "center" }}>
+                        <div className="totp-code-input-center">
                             <div>
                                 <input
                                     type="submit"
-                                    className={clsx(
-                                        getClassName("kcButtonClass"),
-                                        getClassName("kcButtonBlockClass"),
-                                        getClassName("kcButtonLargeClass")
-                                    )}
                                     id="saveTOTPBtn"
                                     // value={msgStr("doSubmit")}
                                     value="Verify"
-                                    style={{ backgroundColor: '#2C82F9', borderRadius: '6px', color: '#FFFFFF' }}
+                                    className={clsx(getClassName("kcButtonClass"), getClassName("kcButtonBlockClass"), getClassName("kcButtonLargeClass"), "totp-btn-verify")}
                                 />
                             </div>
-                            <div style={{ marginTop: "10px" }}>                              
+                            <div className="totp-margin-top10">                              
                                 <a
                                     href={url.loginRestartFlowUrl}
-                                    className={clsx("kcButtonClass", "kcButtonDefaultClass", "kcButtonLargeClass")}
                                     id="cancelTOTPBtn"
-                                    style={{ fontSize: '14px', color: '#2C82F9', fontWeight: '400' }}
+                                    className={clsx("kcButtonClass", "kcButtonDefaultClass", "kcButtonLargeClass", "totp-btn-cancel")}
                                 >
                                     {msg("doCancel")}
                                 </a>
@@ -225,26 +216,20 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
 
                         </div>
                     ) : (
-                        <div style={{ textAlign: "center" }}>
+                        <div className="totp-code-input-center">
                             <div>
                                 <input
                                     type="submit"
-                                    className={clsx(
-                                        getClassName("kcButtonClass"),
-                                        getClassName("kcButtonBlockClass"),
-                                        getClassName("kcButtonLargeClass")
-                                    )}
                                     id="saveTOTPBtn"
                                     value="Verify"
-                                    style={{ backgroundColor: '#2C82F9', borderRadius: '6px', color: '#FFFFFF' }}
+                                    className={clsx(getClassName("kcButtonClass"), getClassName("kcButtonBlockClass"), getClassName("kcButtonLargeClass"), "totp-btn-verify")}
                                 />
                             </div>
-                            <div style={{ marginTop: "10px" }}>
+                            <div className="totp-margin-top10">
                                 <a
                                     href={url.loginRestartFlowUrl}
-                                    className={clsx("kcButtonClass", "kcButtonDefaultClass", "kcButtonLargeClass")}
                                     id="cancelTOTPBtn"
-                                    style={{ fontSize: '14px', color: '#2C82F9', fontWeight: '400' }}
+                                    className={clsx("kcButtonClass", "kcButtonDefaultClass", "kcButtonLargeClass", "totp-btn-cancel")}
                                 >
                                     {msg("doCancel")}
                                 </a>

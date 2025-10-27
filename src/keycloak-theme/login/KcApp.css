@@ -597,3 +597,49 @@ input.form-control:-webkit-autofill:active {
     color: #2C82F9;
     font-weight: 400;
 }
+
+/* === Classes for LoginConfigTotp.tsx === */
+.totp-header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.totp-logo {
+    width: 175px;
+    margin-bottom: 20px;
+}
+.totp-title {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 40px;
+    color: #161F33;
+    text-align: center;
+    margin-bottom: 6px;
+}
+.totp-secret-icon-right30 {
+    right: 30px;
+}
+.totp-secret-icon-right5 {
+    right: 5px;
+}
+.totp-code-input-center {
+    text-align: center;
+}
+.totp-form-padding {
+    padding-left: 20px;
+}
+.totp-btn-verify {
+    background-color: #2C82F9;
+    border-radius: 6px;
+    color: #FFFFFF;
+}
+.totp-btn-cancel {
+    font-size: 14px;
+    color: #2C82F9;
+    font-weight: 400;
+}
+.totp-margin-top10 {
+    margin-top: 10px;
+}
