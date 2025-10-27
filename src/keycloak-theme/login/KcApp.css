@@ -462,3 +462,102 @@ input.form-control:-webkit-autofill:active {
     align-items: center;
     gap: 8px;
 }
+
+/* === Classes for refactored inline styles from Login.tsx === */
+.login-header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.login-logo {
+    width: 175px;
+    margin-bottom: 20px;
+}
+.login-greeting {
+    font-family: 'Cousine';
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 40px;
+    color: #F4F5F6;
+    text-align: center;
+    margin-bottom: 6px;
+}
+.login-subtitle {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    color: #F4F5F6;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.login-form-group-margin30 {
+    margin-top: 30px;
+}
+.login-form-group-margin15 {
+    margin-top: 15px;
+}
+.login-form-group-margin10 {
+    margin-top: 10px;
+}
+.login-form-group-margin20 {
+    margin-top: 20px;
+}
+.login-floating-label-group {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+.login-input-transparent {
+    background: transparent;
+}
+.login-password-toggle {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.login-checkbox-radius {
+    border-radius: 4px;
+}
+.login-rememberme-span {
+    font-size: 14px;
+    color: #5E6067;
+}
+.login-feedback-span {
+    text-align: center;
+    margin: 0px 5px;
+}
+.login-feedback-success {
+    color: #03C40B;
+}
+.login-feedback-error {
+    color: #FA1C1C;
+}
+.login-submit-btn {
+    background-color: #2C82F9;
+    border-radius: 6px;
+    color: #FFFFFF;
+}
+.login-reset-link {
+    font-size: 14px;
+    color: #2C82F9;
+    font-weight: 400;
+}
+.login-or-continue {
+    font-size: 14px;
+    color: #ffffff;
+}
+.login-social-link {
+    border-radius: 6px !important;
+    font-size: 14px;
+    border: 1px solid #1E24323B !important;
+    background: transparent !important;
+    color: #ffffff !important;
+}
+.login-social-img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}

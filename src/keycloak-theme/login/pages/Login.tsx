@@ -11,12 +11,6 @@ import type { I18n } from "../i18n";
 import type { KcContext } from "../kcContext";
 
 
-const my_custom_param = new URL(window.location.href).searchParams.get("my_custom_param");
-
-if (my_custom_param !== null) {
-    console.log("my_custom_param:", my_custom_param);
-}
-
 export default function Login(props: PageProps<Extract<KcContext, { pageId: "login.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
     const [greeting, setGreeting] = useState('');
@@ -92,19 +86,19 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
 
             <div id="kc-form" className={clsx(realm.password && social.providers !== undefined && getClassName("kcContentWrapperClass"))}>
                 <div id="kc-form-wrapper">
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginBottom: '20px' }}>
-                        <img src={logo} style={{ width: '175px', marginBottom: '20px' }} />
-                        <div style={{ fontFamily: 'Cousine', fontWeight: 400, fontSize: '24px', lineHeight: '40px', color: '#F4F5F6', textAlign: 'center', marginBottom: '6px' }}>
+                    <div className="login-header-container">
+                        <img src={logo} className="login-logo" />
+                        <div className="login-greeting">
                             {greeting} !
                         </div>
-                        <div style={{ fontWeight: 400, fontSize: '18px', lineHeight: '28px', color: '#F4F5F6', textAlign: 'center', marginBottom: '10px' }}>
+                        <div className="login-subtitle">
                             Work Smarter. Lead Better. Rise Higher.
                         </div>
                     </div>
 
                     {realm.password && (
                         <form id="kc-form-login" onSubmit={onSubmit} action={url.loginAction} method="post">
-                            <div className={getClassName("kcFormGroupClass")} style={{ marginTop: '30px' }}>
+                            <div className={clsx(getClassName("kcFormGroupClass"), "login-form-group-margin30") }>
                                 {!usernameHidden &&
                                     (() => {
                                         const label = !realm.loginWithEmailAllowed
@@ -116,11 +110,10 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                         const autoCompleteHelper: typeof label = label === "usernameOrEmail" ? "username" : label;
                                         return (
                                             <>
-                                                <div className="floating-label-group" style={{ marginRight: '0px', marginLeft: '0px' }}>
+                                                <div className="floating-label-group login-floating-label-group">
                                                     <input
                                                         tabIndex={1}
                                                         id={autoCompleteHelper}
-                                                        className={getClassName("kcInputClass") + " form-control"}
                                                         name={autoCompleteHelper}
                                                         defaultValue={login.username ?? ""}
                                                         type="text"
@@ -130,7 +123,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                                         onInvalid={(e) => handleInvalidInput(e, 'Enter a Valid Email Address')}
                                                         onChange={(e) => handleInputChange(e, 'Enter a Valid Email Address')}
                                                         required
-                                                        style={{ background: "transparent" }}
+                                                        className={clsx(getClassName("kcInputClass"), "form-control", "login-input-transparent")}
                                                     />
                                                     <label htmlFor={autoCompleteHelper} className={getClassName("kcLabelClass") + " floating-label"}>
                                                         Email Address
@@ -140,19 +133,18 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                         );
                                     })()}
                             </div>
-                            <div className={getClassName("kcFormGroupClass")} style={{ marginTop: '30px' }}>
-                                <div className="floating-label-group" style={{ marginRight: '0px', marginLeft: '0px' }}>
+                            <div className={clsx(getClassName("kcFormGroupClass"), "login-form-group-margin30") }>
+                                <div className="floating-label-group login-floating-label-group">
                                     <input
                                         tabIndex={2}
                                         id="password"
-                                        className={getClassName("kcInputClass") + " form-control"}
                                         name="password"
                                         type={isPasswordVisible ? "text" : "password"}
                                         autoComplete="off"
                                         onInvalid={(e) => handleInvalidInput(e, 'Enter a Password')}
                                         onChange={(e) => handleInputChange(e, '')}
                                         required
-                                        style={{ background: "transparent" }}
+                                        className={clsx(getClassName("kcInputClass"), "form-control", "login-input-transparent")}
                                     />
                                     <label htmlFor="password" className={getClassName("kcLabelClass") + " floating-label"}>
                                         Password
@@ -160,13 +152,12 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                     <img
                                         src={isPasswordVisible ? eyeicon : eyeiconInvisible}
                                         alt="Toggle password visibility"
-                                        className="password-toggle-icon"
+                                        className="password-toggle-icon login-password-toggle"
                                         onClick={togglePasswordVisibility}
-                                        style={{ cursor: 'pointer', position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)' }}
                                     />
                                 </div>
                             </div>
-                            <div className={clsx(getClassName("kcFormGroupClass"), getClassName("kcFormSettingClass"))} style={{ marginTop: '15px' }}>
+                            <div className={clsx(getClassName("kcFormGroupClass"), getClassName("kcFormSettingClass"), "login-form-group-margin15") }>
                                 <div id="kc-form-options">
                                     {realm.rememberMe && !usernameHidden && (
                                         <div className="checkbox">
@@ -181,9 +172,9 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                                             "checked": true
                                                         }
                                                         : {})}
-                                                    style={{ borderRadius: '4px' }}
+                                                    className="login-checkbox-radius"
                                                 />
-                                                <span style={{ fontSize: '14px', color: '#5E6067' }}> {msg("rememberMe")} </span>
+                                                <span className="login-rememberme-span"> {msg("rememberMe")} </span>
                                             </label>
                                         </div>
                                     )}
@@ -196,14 +187,14 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                     {message.type === "error" && <span className={getClassName("kcFeedbackErrorIcon")}></span>}
                                     {message.type === "info" && <span className={getClassName("kcFeedbackInfoIcon")}></span>}
                                     <span
-                                        className="kc-feedback-text"
                                         dangerouslySetInnerHTML={{
                                             "__html": message.summary
-                                        }} style={{ textAlign: 'center', margin: '0px 5px', color: message.type === "success" ? '#03C40B' : message.type === "error" ? '#FA1C1C' : 'inherit' }}
+                                        }}
+                                        className={clsx("kc-feedback-text", "login-feedback-span", message.type === "success" && "login-feedback-success", message.type === "error" && "login-feedback-error")}
                                     />
                                 </div>
                             )}
-                            <div id="kc-form-buttons" className={getClassName("kcFormGroupClass")} style={{ marginTop: '10px' }}>
+                            <div id="kc-form-buttons" className={clsx(getClassName("kcFormGroupClass"), "login-form-group-margin10") }>
                                 <input
                                     type="hidden"
                                     id="id-hidden-input"
@@ -216,37 +207,31 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                 />
                                 <input
                                     tabIndex={4}
-                                    className={clsx(
-                                        getClassName("kcButtonClass"),
-                                        // getClassName("kcButtonPrimaryClass"),
-                                        getClassName("kcButtonBlockClass"),
-                                        getClassName("kcButtonLargeClass")
-                                    )}
                                     name="login"
                                     id="kc-login"
                                     type="submit"
                                     value={"Sign - In"}
                                     disabled={isLoginButtonDisabled}
-                                    style={{ backgroundColor: '#2C82F9', borderRadius: '6px', color: '#FFFFFF' }}
+                                    className={clsx(getClassName("kcButtonClass"), getClassName("kcButtonBlockClass"), getClassName("kcButtonLargeClass"), "login-submit-btn")}
                                 />
                             </div>
-                            <div className={getClassName("kcFormGroupClass")} style={{ textAlign: 'center', marginTop: '10px' }}>
+                            <div className={clsx(getClassName("kcFormGroupClass"), "login-form-group-margin10") } style={{ textAlign: 'center' }}>
                                 <div className={getClassName("kcFormOptionsWrapperClass")}>
                                     {realm.resetPasswordAllowed && (
                                         <span>
-                                            <a tabIndex={5} href={url.loginResetCredentialsUrl} style={{ fontSize: '14px', color: '#2C82F9', fontWeight: '400' }}>
+                                            <a tabIndex={5} href={url.loginResetCredentialsUrl} className="login-reset-link">
                                                 Forgot Password?
                                             </a>
                                         </span>
                                     )}
                                 </div>
                             </div>
-                            <div className={getClassName("kcFormGroupClass")} style={{ marginTop: '20px' }} >
+                            <div className={clsx(getClassName("kcFormGroupClass"), "login-form-group-margin20") } >
                                 <div className="separator">
-                                    <span style={{ fontSize: '14px', color: '#ffffff' }}>or continue with:</span>
+                                    <span className="login-or-continue">or continue with:</span>
                                 </div>
                             </div>
-                            <div className={getClassName("kcFormGroupClass")} style={{ marginTop: '10px' }}>
+                            <div className={clsx(getClassName("kcFormGroupClass"), "login-form-group-margin10") }>
                                 {realm.password && social.providers !== undefined && (
                                     <div
                                         id="kc-social-providers"
@@ -259,8 +244,8 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                         >
                                             {social.providers.map(p => (
                                                 <li key={p.providerId} className={getClassName("kcFormSocialAccountListLinkClass")}>
-                                                    <a href={p.loginUrl} id={`zocial-${p.alias}`} className={clsx("zocial", p.providerId)} style={{ borderRadius: '6px', fontSize: '14px', border: '1px solid #1E24323B', background: 'transparent', color: '#ffffff' }} >
-                                                        <img src={microsoft} style={{ width: '20px', height: '20px', marginRight: '5px' }} />
+                                                    <a href={p.loginUrl} id={`zocial-${p.alias}`} className={clsx("zocial", p.providerId, "login-social-link")} >
+                                                        <img src={microsoft} className="login-social-img" />
                                                         <span>{p.displayName}</span>
                                                     </a>
                                                 </li>
