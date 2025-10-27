@@ -5,7 +5,6 @@ import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
 import logo from "../assets/logoHCM.png"
 import { useState } from "react";
-import { urlToHttpOptions } from "http";
 
 export default function LoginResetPassword(props: PageProps<Extract<KcContext, { pageId: "login-reset-password.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -15,15 +14,9 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
         classes
     });
 
-    const { url, realm, auth } = kcContext;
+    const { url, realm } = kcContext;
 
-    const { msg, msgStr } = i18n;
-    const [showOverlayPopup, setShowOverlayPopup] = useState(true);
-
-    const handleDismiss = () => {
-        // Hide the overlay popup
-        setShowOverlayPopup(false);
-    };
+    const { msg } = i18n;
 
     const handleInvalidInput = (event: React.FormEvent<HTMLInputElement>, errorMessage: string) => {
         const target = event.target as HTMLInputElement;
@@ -36,7 +29,6 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
         target.setCustomValidity(isValidEmail ? '' : errorMessage);     
     }; 
 
-    const [message, setMessage] = useState({ summary: "", type: "" });
 
     return (
         <Template
@@ -45,10 +37,10 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
             headerNode={msg("emailForgotTitle")} 
             infoNode={msg("emailInstruction")}
         >       
-        <div style={{ height: "300px", paddingBottom: "100px" }}>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginBottom: '20px' }}>
-                    <img src={logo} style={{ width: '175px', marginBottom: '20px', filter: 'contrast(1.75)' }} />
-                    <div style={{ fontWeight: 400, fontSize: '25px', lineHeight: '40px', color: '#253053', textAlign: 'center', marginBottom: '6px', filter: 'contrast(1.75)' }}>
+        <div className="reset-container">
+                <div className="reset-header-container">
+                    <img src={logo} className="login-logo" />
+                    <div className="reset-title">
                         Forgot Password
                     </div>
                 </div>
@@ -75,19 +67,18 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
                     <input
                         className={clsx(
                             getClassName("kcButtonClass"),
-                            // getClassName("kcButtonPrimaryClass"),
                             getClassName("kcButtonBlockClass"),
-                            getClassName("kcButtonLargeClass")
+                            getClassName("kcButtonLargeClass"),
+                            "reset-submit-btn"
                         )}
                         type="submit"
                         value="Reset Password"
-                        style={{ backgroundColor: '#2C82F9', borderRadius: '6px', color: '#FFFFFF' }}
                     />
                 </div>
-                <div className={getClassName("kcFormGroupClass")} style={{ textAlign: 'center', marginTop: '20px' }}>
+                <div className={clsx(getClassName("kcFormGroupClass"), "reset-form-group-margin20") }>
                     <div className={getClassName("kcFormOptionsWrapperClass")}>
                         <span>
-                            <a href={url.loginUrl} tabIndex={5} style={{ fontSize: '14px', color: '#2C82F9', fontWeight: '400' }}>
+                            <a href={url.loginUrl} tabIndex={5} className="reset-signin-link">
                                 Sign - In
                             </a>
                         </span>

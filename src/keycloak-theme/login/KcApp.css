@@ -561,3 +561,39 @@ input.form-control:-webkit-autofill:active {
     height: 20px;
     margin-right: 5px;
 }
+
+/* === Classes for LoginResetPassword.tsx === */
+.reset-container {
+    height: 300px;
+    padding-bottom: 100px;
+}
+.reset-header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.reset-title {
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 40px;
+    color: #253053;
+    text-align: center;
+    margin-bottom: 6px;
+    filter: contrast(1.75);
+}
+.reset-submit-btn {
+    background-color: #2C82F9;
+    border-radius: 6px;
+    color: #FFFFFF;
+}
+.reset-form-group-margin20 {
+    margin-top: 20px;
+    text-align: center;
+}
+.reset-signin-link {
+    font-size: 14px;
+    color: #2C82F9;
+    font-weight: 400;
+}
