@@ -15,9 +15,6 @@ const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
 const RegisterUserProfile = lazy(() => import("./pages/RegisterUserProfile"));
 const Terms = lazy(() => import("./pages/Terms"));
-const MyExtraPage1 = lazy(() => import("./pages/MyExtraPage1"));
-const MyExtraPage2 = lazy(() => import("./pages/MyExtraPage2"));
-const MyExtraPage3 = lazy(() => import("./pages/MyExtraPage3"));
 const Info = lazy(() => import("keycloakify/login/pages/Info"));
 const LoginResetPassword = lazy(() => import("./pages/LoginResetPassword"));
 const LoginUpdatePassword = lazy(() => import("./pages/LoginUpdatePassword"));
@@ -61,9 +58,6 @@ export default function KcApp(props: { kcContext: KcContext; }) {
                     case "register.ftl": return <Register {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;
                     case "register-user-profile.ftl": return <RegisterUserProfile {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />
                     case "terms.ftl": return <Terms {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;
-                    case "my-extra-page-1.ftl": return <MyExtraPage1 {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;
-                    case "my-extra-page-2.ftl": return <MyExtraPage2 {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;
-                    case "my-extra-page-3.ftl": return <MyExtraPage3 {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;
                     // We choose to use the default Template for the Info page and to download the theme resources.
                     case "info.ftl": return <Info {...{ kcContext, i18n, classes }} Template={DefaultTemplate} doUseDefaultCss={true} />;
                     default: return <Fallback {...{ kcContext, i18n, classes }} Template={Template} doUseDefaultCss={true} />;

@@ -7,11 +7,11 @@ import logo from "../assets/logoHCM.png"
 import random from "../assets/Random.svg"
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { useState } from "react";
+import React, { useState } from "react";
 import eyeicon from "../assets/eyeIcon.svg";
 import eyeiconInvisible from "../assets/eyeIconInvisible.svg";
 
-export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, { pageId: "login-update-password.ftl" }>, I18n>) {
+const LoginUpdatePassword: React.FC<PageProps<Extract<KcContext, { pageId: "login-update-password.ftl" }>, I18n>> = (props) => {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
     const { getClassName } = useGetClassName({
@@ -23,11 +23,64 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
 
     const { msg, msgStr } = i18n;
     
-    const [isPasswordVisible , setPasswordVisible] = useState(false);
-    const [isConfirmPasswordVisible , setConfirmPasswordVisible] = useState(false);
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [passwordError, setPasswordError] = useState("");
+  function handleInvalidInput(event: React.FormEvent<HTMLInputElement>, errorMessage: string) {
+    const target = event.target as HTMLInputElement;
+    target.setCustomValidity(errorMessage);
+  }
+
+  const [isPasswordVisible , setPasswordVisible] = useState(false);
+  const [isConfirmPasswordVisible , setConfirmPasswordVisible] = useState(false);
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  // Helper to generate a valid password
+  const generateValidPassword = (): string => {
+    // Try until a valid password is generated
+    let pwd = "";
+    let error = "";
+    let attempts = 0;
+    while (attempts < 10) {
+      // Generate a random password with required rules
+      // 2 digits, 1 lowercase, 1 uppercase, 1 special, 3-5 random
+      const lower = String.fromCharCode(97 + Math.floor(Math.random() * 26));
+      const upper = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+      const digits = Array.from({length:2}, () => String.fromCharCode(48 + Math.floor(Math.random() * 10))).join("");
+      const specials = "!@#$%^&*()_+-=~[]{}|;:,.<>?";
+      const special = specials[Math.floor(Math.random() * specials.length)];
+      const restLength = 8 + Math.floor(Math.random() * 3) - 5; // 3-5 random chars
+      const rest = Array.from({length: restLength}, () => {
+        const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        return chars[Math.floor(Math.random() * chars.length)];
+      }).join("");
+      pwd = lower + upper + digits + special + rest;
+      // Shuffle
+      pwd = pwd.split('').sort(() => 0.5 - Math.random()).join('');
+      error = validatePassword(pwd);
+      if (!error) break;
+      attempts++;
+    }
+    return pwd;
+  };
+
+  const handleGeneratePassword = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const newPwd = generateValidPassword();
+    setPassword(newPwd);
+    setConfirmPassword(newPwd);
+    setPasswordError("");
+    // Set the value in the DOM fields as well
+    const pwdInput = document.getElementById("password-new") as HTMLInputElement;
+    const confirmInput = document.getElementById("password-confirm") as HTMLInputElement;
+    if (pwdInput) {
+      pwdInput.value = newPwd;
+      pwdInput.setCustomValidity("");
+    }
+    if (confirmInput) {
+      confirmInput.value = newPwd;
+      confirmInput.setCustomValidity("");
+    }
+  };
 
     const togglePasswordVisibility = () => {
         setPasswordVisible(!isPasswordVisible);
@@ -65,48 +118,44 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
         return ""; // No error
     };
 
+    // Enhanced validation for password and confirm password
+    const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+        setPassword(value);
+        let error = "";
+        if (!value) {
+            error = "Enter a Password";
+        } else {
+            error = validatePassword(value);
+        }
+        setPasswordError(error);
+        event.target.setCustomValidity(error);
+    };
+
     const handleConfirmPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setConfirmPassword(event.target.value);
-    };
-    const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-        const target = event.target as HTMLInputElement;
-        const inputValue = target.value;
-        const error = validatePassword(inputValue);
-        target.setCustomValidity(error); // Set the custom validity message
-    };
-
-    const handleInvalidInput = (event: React.FormEvent<HTMLInputElement>, errorMessage: string) => {
-        const target = event.target as HTMLInputElement;
-        target.setCustomValidity(errorMessage);
+        const value = event.target.value;
+        setConfirmPassword(value);
+        let error = "";
+        if (!value) {
+            error = "Enter a Password";
+        } else if (password !== value) {
+            error = "Passwords do not match";
+        }
+        event.target.setCustomValidity(error);
     };
 
-
+    // handleConfirmPasswordChange is now enhanced above
     return (
       <Template
         {...{ kcContext, i18n, doUseDefaultCss, classes }}
         headerNode={msg("updatePasswordTitle")}
       >
         <div>
-          <img
-            src={logo}
-            style={{
-              width: "150px",
-              height: "30px",
-              marginRight: "10px",
-              marginBottom: "20px",
-            }}
-          />
-          <div
-            style={{
-              fontWeight: 400,
-              fontSize: "25px",
-              lineHeight: "40px",
-              color: "#253053",
-              textAlign: "left",
-              marginBottom: "20px",
-            }}
-          >
-            Set Your Password
+          <div className="totp-header-container">
+            <img src={logo} className="totp-logo" />
+            <div className="totp-title">
+              Set Your Password
+            </div>
           </div>
         </div>
 
@@ -140,8 +189,15 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
                 id="password-new"
                 name="password-new"
                 className={getClassName("kcInputClass") + " form-control"}
-                onInvalid={(e) => handleInvalidInput(e, "Enter a Password")}
-                onChange={handleBlur}
+                value={password}
+                onInvalid={e => {
+                  if (!password) {
+                    handleInvalidInput(e, "Enter a Password");
+                  } else {
+                    handleInvalidInput(e, validatePassword(password));
+                  }
+                }}
+                onChange={handlePasswordChange}
                 required
               />
               <label
@@ -177,9 +233,15 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
                 className={getClassName("kcInputClass") + " form-control"}
                 value={confirmPassword}
                 onChange={handleConfirmPasswordChange}
-                onInvalid={(e) =>
-                  handleInvalidInput(e, "Confirm your Password")
-                }
+                onInvalid={e => {
+                  if (!confirmPassword) {
+                    handleInvalidInput(e, "Enter a Password");
+                  } else if (password !== confirmPassword) {
+                    handleInvalidInput(e, "Passwords do not match");
+                  } else {
+                    handleInvalidInput(e, "");
+                  }
+                }}
                 required
               />
               <label
@@ -231,7 +293,8 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
                 getClassName("kcButtonBlockClass"),
                 getClassName("kcButtonLargeClass")
               )}
-              type="submit"
+              type="button"
+              onClick={handleGeneratePassword}
               style={{
                 borderRadius: "6px",
                 fontSize: "14px",
@@ -257,4 +320,5 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
         </form>
       </Template>
     );
-}
+};
+export default LoginUpdatePassword;
