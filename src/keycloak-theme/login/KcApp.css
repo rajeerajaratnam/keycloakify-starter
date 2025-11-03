@@ -694,3 +694,13 @@ input.form-control:-webkit-autofill:active {
     color: #2C82F9;
     font-weight: 400;
 }
+
+@media (max-width: 1600px) {
+    .middle-container {
+        padding: 7.5% 7.5% 0 !important
+    }
+
+    .kcFormCardClass{
+        padding: 40px !important;
+    }
+}
