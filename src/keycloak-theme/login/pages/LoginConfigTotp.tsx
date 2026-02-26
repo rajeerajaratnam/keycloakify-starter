@@ -46,7 +46,7 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
             doUseDefaultCss={doUseDefaultCss}
             classes={classes}
             headerNode={msg("loginTotpTitle")}
-            displayMessage={!messagesPerField.existsError("totp")}
+            displayMessage={messagesPerField.existsError("totp")}
         >
             <div>
 
@@ -179,6 +179,34 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                         />
                     ))}
                 </div>
+                {messagesPerField.existsError("totp") && (
+                    <span
+                        id="input-error-otp-code"
+                        className={clsx("kcInputErrorMessageClass")}
+                        aria-live="polite"
+                        style={{ color: "#d32f2f", display: "block", marginTop: "8px", fontSize: "14px" }}
+                    >
+                        {(() => {
+                            const errorMsg = messagesPerField.get("totp");
+                            if (errorMsg) {
+                                return errorMsg;
+                            }
+                            // Fallback: check if it might be an expiry issue based on context
+                            // For now, show invalid message as default fallback
+                            return "Invalid one-time password. Please try again.";
+                        })()}
+                    </span>
+                )}
+                {messagesPerField.existsError("expired") && (
+                    <span
+                        id="input-error-otp-expired"
+                        className={clsx("kcInputErrorMessageClass")}
+                        aria-live="polite"
+                        style={{ color: "#d32f2f", display: "block", marginTop: "8px", fontSize: "14px" }}
+                    >
+                        {messagesPerField.get("expired") || "Your one-time password has expired. Please request a new code to continue."}
+                    </span>
+                )}
             </li>
                 </ol>
 

@@ -104,8 +104,26 @@ export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "
                                 id="input-error-otp-code"
                                 className={clsx("kcInputErrorMessageClass")}
                                 aria-live="polite"
+                                style={{ color: "#d32f2f", display: "block", marginTop: "8px", fontSize: "14px" }}
                             >
-                                {messagesPerField.get("totp")}
+                                {(() => {
+                                    const errorMsg = messagesPerField.get("totp");
+                                    if (errorMsg) {
+                                        return errorMsg;
+                                    }
+                                    // Fallback: show invalid message as default
+                                    return "Invalid one-time password. Please try again.";
+                                })()}
+                            </span>
+                        )}
+                        {messagesPerField.existsError("expired") && (
+                            <span
+                                id="input-error-otp-expired"
+                                className={clsx("kcInputErrorMessageClass")}
+                                aria-live="polite"
+                                style={{ color: "#d32f2f", display: "block", marginTop: "8px", fontSize: "14px" }}
+                            >
+                                {messagesPerField.get("expired") || "Your one-time password has expired. Please request a new code to continue."}
                             </span>
                         )}
                         </div>
