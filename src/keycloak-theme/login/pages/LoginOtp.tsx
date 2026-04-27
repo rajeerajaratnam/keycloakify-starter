@@ -6,8 +6,7 @@ import type { I18n } from "../i18n";
 import logo from "../assets/logoHCM.png";
 import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
 
-export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "login-otp.ftl" }>, I18n>) 
-{
+export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "login-otp.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
     const { url, messagesPerField } = kcContext;
     const { msg, msgStr } = i18n;
@@ -17,15 +16,22 @@ export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "
         classes
     });
 
+
     // 6-digit code state
     const [code, setCode] = useState(["", "", "", "", "", ""]);
     const inputsRef = useRef<Array<HTMLInputElement | null>>([]);
+
+    // Local error cleared state
+    const [localErrorCleared, setLocalErrorCleared] = useState(false);
 
     const handleCodeChange = (idx: number, value: string) => {
         if (!/^[0-9]?$/.test(value)) return; // Only allow single digit
         const newCode = [...code];
         newCode[idx] = value;
         setCode(newCode);
+
+        // Clear error when user starts typing
+        setLocalErrorCleared(true);
 
         // Move to next input if filled
         if (value && idx < 5) {
@@ -77,57 +83,57 @@ export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "
                 >
                     <div className={clsx("kcFormGroupClass")}>
                         <div className={clsx("kcLabelWrapperClass")}>
-                            <label htmlFor="otp" className={clsx("kcLabelClass", "otp-label") }>
+                            <label htmlFor="otp" className={clsx("kcLabelClass", "otp-label")}>
                                 We’ve Sent you a code
                             </label>
                             <div className="otp-code-inputs">
-                            {code.map((digit, idx) => (
-                                <input
-                                    key={idx}
-                                    type="text"
-                                    inputMode="numeric"
-                                    maxLength={1}
-                                    value={digit}
-                                    ref={el => (inputsRef.current[idx] = el)}
-                                    onChange={e => handleCodeChange(idx, e.target.value.replace(/[^0-9]/, ""))}
-                                    onKeyDown={e => handleKeyDown(idx, e)}
-                                    autoFocus={idx === 0}
-                                    name={`code-${idx}`}
-                                    className={clsx("otp-code-input", "otp-code-input-center")}
-                                />
-                            ))}
+                                {code.map((digit, idx) => (
+                                    <input
+                                        key={idx}
+                                        type="text"
+                                        inputMode="numeric"
+                                        maxLength={1}
+                                        value={digit}
+                                        ref={el => (inputsRef.current[idx] = el)}
+                                        onChange={e => handleCodeChange(idx, e.target.value.replace(/[^0-9]/, ""))}
+                                        onKeyDown={e => handleKeyDown(idx, e)}
+                                        autoFocus={idx === 0}
+                                        name={`code-${idx}`}
+                                        className={clsx("otp-code-input", "otp-code-input-center")}
+                                    />
+                                ))}
+                            </div>
+                            {/* Hidden input for form submission */}
+                            <input type="hidden" id="otp-hidden" name="otp" value={code.join("")} />
+                            {messagesPerField.existsError("totp") && !localErrorCleared && (
+                                <span
+                                    id="input-error-otp-code"
+                                    className={clsx("kcInputErrorMessageClass")}
+                                    aria-live="polite"
+                                    style={{ color: "#d32f2f", display: "block", marginTop: "8px", fontSize: "14px" }}
+                                >
+                                    {(() => {
+                                        const errorMsg = messagesPerField.get("totp");
+                                        if (errorMsg) {
+                                            return errorMsg;
+                                        }
+                                        // Fallback: show invalid message as default
+                                        return "Invalid one-time password. Please try again.";
+                                    })()}
+                                </span>
+                            )}
+                            {messagesPerField.existsError("expired") && (
+                                <span
+                                    id="input-error-otp-expired"
+                                    className={clsx("kcInputErrorMessageClass")}
+                                    aria-live="polite"
+                                    style={{ color: "#d32f2f", display: "block", marginTop: "8px", fontSize: "14px" }}
+                                >
+                                    {messagesPerField.get("expired") || "Your one-time password has expired. Please request a new code to continue."}
+                                </span>
+                            )}
                         </div>
-                        {/* Hidden input for form submission */}
-                        <input type="hidden" id="otp-hidden" name="otp" value={code.join("")} />
-                        {messagesPerField.existsError("totp") && (
-                            <span
-                                id="input-error-otp-code"
-                                className={clsx("kcInputErrorMessageClass")}
-                                aria-live="polite"
-                                style={{ color: "#d32f2f", display: "block", marginTop: "8px", fontSize: "14px" }}
-                            >
-                                {(() => {
-                                    const errorMsg = messagesPerField.get("totp");
-                                    if (errorMsg) {
-                                        return errorMsg;
-                                    }
-                                    // Fallback: show invalid message as default
-                                    return "Invalid one-time password. Please try again.";
-                                })()}
-                            </span>
-                        )}
-                        {messagesPerField.existsError("expired") && (
-                            <span
-                                id="input-error-otp-expired"
-                                className={clsx("kcInputErrorMessageClass")}
-                                aria-live="polite"
-                                style={{ color: "#d32f2f", display: "block", marginTop: "8px", fontSize: "14px" }}
-                            >
-                                {messagesPerField.get("expired") || "Your one-time password has expired. Please request a new code to continue."}
-                            </span>
-                        )}
-                        </div>
-                        
+
                     </div>
 
                     <div className="otp-code-input-center">

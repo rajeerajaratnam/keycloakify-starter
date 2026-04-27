@@ -20,23 +20,85 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
         classes
     });
 
+    // Workaround for Keycloak 22.x: TotpBean regenerates a fresh secret on
+    // every render of CONFIGURE_TOTP, so after a failed verify the server's
+    // new secret no longer matches what the user's authenticator app holds.
+    // Persist the first secret we render and replay it on subsequent renders
+    // (and in the posted hidden field) so the user's scanned code keeps working.
+    const TOTP_STORAGE_KEY = "risehr.kc.totpSetup";
+    const hasTotpError = messagesPerField.existsError("totp");
+    const [persistedTotp] = React.useState<{
+        totpSecret: string;
+        totpSecretEncoded: string;
+        totpSecretQrCode: string;
+    }>(() => {
+        if (hasTotpError && typeof window !== "undefined") {
+            try {
+                const raw = window.sessionStorage.getItem(TOTP_STORAGE_KEY);
+                if (raw) {
+                    return JSON.parse(raw);
+                }
+            } catch {
+                /* fall through to fresh */
+            }
+        }
+        const fresh = {
+            totpSecret: totp.totpSecret,
+            totpSecretEncoded: totp.totpSecretEncoded,
+            totpSecretQrCode: totp.totpSecretQrCode
+        };
+        if (typeof window !== "undefined") {
+            try {
+                window.sessionStorage.setItem(TOTP_STORAGE_KEY, JSON.stringify(fresh));
+            } catch {
+                /* storage unavailable */
+            }
+        }
+        return fresh;
+    });
+    const clearPersistedTotp = () => {
+        if (typeof window === "undefined") return;
+        try {
+            window.sessionStorage.removeItem(TOTP_STORAGE_KEY);
+        } catch {
+            /* ignore */
+        }
+    };
+
     const [code, setCode] = React.useState(["", "", "", "", "", ""]);
     const inputsRef = React.useRef<Array<HTMLInputElement | null>>([]);
 
+    // Local error cleared state
+    const [localErrorCleared, setLocalErrorCleared] = React.useState(false);
+
+    // ✅ FIX: Keep hidden input always in sync with code state
+    // This ensures the correct OTP value is ready before the browser collects form data on submit
+    React.useEffect(() => {
+        const el = document.getElementById("totp-hidden") as HTMLInputElement;
+        if (el) el.value = code.join("");
+    }, [code]);
+
     const handleCodeChange = (idx: number, value: string) => {
-        if (!/^[0-9a-zA-Z]?$/.test(value)) return; 
+        if (!/^[0-9a-zA-Z]?$/.test(value)) return;
         const newCode = [...code];
         newCode[idx] = value;
         setCode(newCode);
+        // Clear error when user starts typing
+        setLocalErrorCleared(true);
         if (value && idx < 5) {
             inputsRef.current[idx + 1]?.focus();
         }
     };
-    
+
     const handleKeyDown = (idx: number, e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Backspace" && !code[idx] && idx > 0) {
             inputsRef.current[idx - 1]?.focus();
         }
+    };
+
+    // ✅ FIX: handleSubmit no longer needs to do anything — useEffect keeps hidden input in sync
+    const handleSubmit = (e: React.FormEvent) => {
+        // Let the form submit naturally with the already-synced hidden input value
     };
 
     return (
@@ -57,15 +119,15 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                     </div>
                 </div>
 
-                
+
                 <ol id="kc-totp-settings">
-                    
+
                     {mode == "manual" ? (
                         <>
                             <li>
                                 <p>{msg("loginTotpManualStep2")}</p>
                                 <p>
-                                    <span id="kc-totp-secret-key">{totp.totpSecretEncoded}</span>
+                                    <span id="kc-totp-secret-key">{persistedTotp.totpSecretEncoded}</span>
                                 </p>
                                 <p>
                                     <a href={totp.qrUrl} id="mode-barcode">
@@ -98,30 +160,30 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                             </li>
                         </>
                     ) : (
-                            <li>
-                                <div className="totp-step-row">
-                                    <div className="totp-step-text">
-                                        <span>
-                                            You will need an authenticator mobile app to complete this process for 
-                                            <a
-                                                href="https://www.microsoft.com/en-us/security/mobile-authenticator-app"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="totp-link"
-                                            >
-                                                Microsoft Authenticator
-                                            </a>
-                                        </span>
-                                    </div>
-                                    <div className="totp-step-qr">
-                                        <img
-                                            id="kc-totp-secret-qr-code"
-                                            src={`data:image/png;base64, ${totp.totpSecretQrCode}`}
-                                            alt="QR code"
-                                        />
-                                    </div>
+                        <li>
+                            <div className="totp-step-row">
+                                <div className="totp-step-text">
+                                    <span>
+                                        You will need an authenticator mobile app to complete this process for
+                                        <a
+                                            href="https://www.microsoft.com/en-us/security/mobile-authenticator-app"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="totp-link"
+                                        >
+                                            Microsoft Authenticator
+                                        </a>
+                                    </span>
                                 </div>
-                            </li>
+                                <div className="totp-step-qr">
+                                    <img
+                                        id="kc-totp-secret-qr-code"
+                                        src={`data:image/png;base64, ${persistedTotp.totpSecretQrCode}`}
+                                        alt="QR code"
+                                    />
+                                </div>
+                            </div>
+                        </li>
                     )}
                     <li>
                         <div className="totp-step-text">
@@ -131,12 +193,12 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                         <div className="totp-step2-subtext">
                             If you can't scan the code, you can enter this secret key into your authenticator App
                             {/* {advancedMsg("loginTotpStep2Subtext") || "If you can't scan the code, you can enter this secret key into your authenticator App"} */}
-                        </div>                   
+                        </div>
                         <div className="totp-secret-row">
                             <div className="totp-secret-input-wrapper">
                                 <input
                                     type={showSecret ? "text" : "password"}
-                                    value={totp.totpSecretEncoded}
+                                    value={persistedTotp.totpSecretEncoded}
                                     readOnly
                                     className="totp-secret-input"
                                     aria-label="Secret key"
@@ -152,68 +214,72 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                                     src={lefticon}
                                     alt="Copy"
                                     title="Copy"
-                                    onClick={() => navigator.clipboard.writeText(totp.totpSecretEncoded)}
+                                    onClick={() => navigator.clipboard.writeText(persistedTotp.totpSecretEncoded)}
                                     className={clsx("totp-secret-icon", "totp-secret-icon-right5")}
                                 />
                             </div>
                         </div>
                     </li>
                     <li>
-                <div className="totp-step-text">
-                    After scanning the QR code above, enter the six-digit code generated by your authenticator.
-                </div>
-                <div className="totp-code-inputs">
-                    {code.map((digit, idx) => (
-                        <input
-                            key={idx}
-                            type="text"
-                            inputMode="numeric"
-                            maxLength={1}
-                            value={digit}
-                            ref={el => (inputsRef.current[idx] = el)}
-                            onChange={e => handleCodeChange(idx, e.target.value.replace(/[^0-9a-zA-Z]/, ""))}
-                            onKeyDown={e => handleKeyDown(idx, e)}
-                            autoFocus={idx === 0}
-                            name={`code-${idx}`}
-                            className={clsx("totp-code-input", "totp-code-input-center")}
-                        />
-                    ))}
-                </div>
-                {messagesPerField.existsError("totp") && (
-                    <span
-                        id="input-error-otp-code"
-                        className={clsx("kcInputErrorMessageClass")}
-                        aria-live="polite"
-                        style={{ color: "#d32f2f", display: "block", marginTop: "8px", fontSize: "14px" }}
-                    >
-                        {(() => {
-                            const errorMsg = messagesPerField.get("totp");
-                            if (errorMsg) {
-                                return errorMsg;
-                            }
-                            // Fallback: check if it might be an expiry issue based on context
-                            // For now, show invalid message as default fallback
-                            return "Invalid one-time password. Please try again.";
-                        })()}
-                    </span>
-                )}
-                {messagesPerField.existsError("expired") && (
-                    <span
-                        id="input-error-otp-expired"
-                        className={clsx("kcInputErrorMessageClass")}
-                        aria-live="polite"
-                        style={{ color: "#d32f2f", display: "block", marginTop: "8px", fontSize: "14px" }}
-                    >
-                        {messagesPerField.get("expired") || "Your one-time password has expired. Please request a new code to continue."}
-                    </span>
-                )}
-            </li>
+                        <div className="totp-step-text">
+                            After scanning the QR code above, enter the six-digit code generated by your authenticator.
+                        </div>
+                        <div className="totp-code-inputs">
+                            {code.map((digit, idx) => (
+                                <input
+                                    key={idx}
+                                    type="text"
+                                    inputMode="numeric"
+                                    maxLength={1}
+                                    value={digit}
+                                    ref={el => (inputsRef.current[idx] = el)}
+                                    onChange={e => handleCodeChange(idx, e.target.value.replace(/[^0-9a-zA-Z]/, ""))}
+                                    onKeyDown={e => handleKeyDown(idx, e)}
+                                    autoFocus={idx === 0}
+                                    name={`code-${idx}`}
+                                    className={clsx("totp-code-input", "totp-code-input-center")}
+                                />
+                            ))}
+                        </div>
+                        {messagesPerField.existsError("totp") && !localErrorCleared && (
+                            <span
+                                id="input-error-otp-code"
+                                className={clsx("kcInputErrorMessageClass")}
+                                aria-live="polite"
+                                style={{ color: "#d32f2f", display: "block", marginTop: "8px", fontSize: "14px" }}
+                            >
+                                {(() => {
+                                    const errorMsg = messagesPerField.get("totp");
+                                    if (errorMsg) {
+                                        return errorMsg;
+                                    }
+                                    return "Invalid one-time password. Please try again.";
+                                })()}
+                            </span>
+                        )}
+                        {messagesPerField.existsError("expired") && (
+                            <span
+                                id="input-error-otp-expired"
+                                className={clsx("kcInputErrorMessageClass")}
+                                aria-live="polite"
+                                style={{ color: "#d32f2f", display: "block", marginTop: "8px", fontSize: "14px" }}
+                            >
+                                {messagesPerField.get("expired") || "Your one-time password has expired. Please request a new code to continue."}
+                            </span>
+                        )}
+                    </li>
                 </ol>
 
-                <form action={url.loginAction} className={clsx("kcFormClass", "totp-form-padding")} id="kc-totp-settings-form" method="post">
+                <form
+                    action={url.loginAction}
+                    className={clsx("kcFormClass", "totp-form-padding")}
+                    id="kc-totp-settings-form"
+                    method="post"
+                    onSubmit={handleSubmit}
+                >
                     <div className={clsx("kcFormGroupClass")}>
                         <input type="hidden" name="totp" value={code.join("")} />
-                        <input type="hidden" id="totpSecret" name="totpSecret" value={totp.totpSecret} />
+                        <input type="hidden" id="totpSecret" name="totpSecret" value={persistedTotp.totpSecret} />
                         {mode && <input type="hidden" id="mode" value={mode} />}
                     </div>
 
@@ -223,21 +289,20 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                                 <input
                                     type="submit"
                                     id="saveTOTPBtn"
-                                    // value={msgStr("doSubmit")}
                                     value="Verify"
                                     className={clsx(getClassName("kcButtonClass"), getClassName("kcButtonBlockClass"), getClassName("kcButtonLargeClass"), "totp-btn-verify")}
                                 />
                             </div>
-                            <div className="totp-margin-top10">                              
+                            <div className="totp-margin-top10">
                                 <a
                                     href={url.loginRestartFlowUrl}
                                     id="cancelTOTPBtn"
+                                    onClick={clearPersistedTotp}
                                     className={clsx("kcButtonClass", "kcButtonDefaultClass", "kcButtonLargeClass", "totp-btn-cancel")}
                                 >
                                     {msg("doCancel")}
                                 </a>
                             </div>
-
                         </div>
                     ) : (
                         <div className="totp-code-input-center">
@@ -253,6 +318,7 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                                 <a
                                     href={url.loginRestartFlowUrl}
                                     id="cancelTOTPBtn"
+                                    onClick={clearPersistedTotp}
                                     className={clsx("kcButtonClass", "kcButtonDefaultClass", "kcButtonLargeClass", "totp-btn-cancel")}
                                 >
                                     {msg("doCancel")}
